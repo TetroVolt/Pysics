@@ -20,7 +20,6 @@ def dotProduct(vect1, vect2):
 		i += 1
 	return vect
 
-#only works for 3D vectors
 def crossProduct(vec1, vec2):
 	#Compute determinants
 	i = vec1.y*vec2.z - vec2.y*vec1.z
@@ -53,6 +52,7 @@ def Vec2DAngAmB(vec1, vec2):
 	x = vec1.x - vec2.x
 	y = vec1.y - vec2.y
 	return degrees(atan(y/x))
+
 """
 	The functions below are for vectors where only the
 	magnitude and angle are given
