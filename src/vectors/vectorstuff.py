@@ -1,6 +1,7 @@
 #Simple implementation for now
 #Vectors are just lists of numbers rightnow
 #Eventually gonna make a vector class
+from math import cos, sin, tan, asin, acos, atan, degrees, radians, sqrt
 
 import math
 
@@ -33,3 +34,39 @@ def angleBetween(vect1, vect2):
 	return acos(dot / (mag1 * mag2))
 
 
+"""
+	The functions below are for vectors where only the
+	magnitude and angle are given
+"""
+
+#function for adding two vectors and getting the magnitude
+def MagApB(Amag, Aang, Bmag, Bang):
+	Aang = radians(Aang)
+	Bang = radians(Bang)
+	x = Amag*cos(Aang) + Bmag*cos(Bang)
+	y = Amag*sin(Aang) + Bmag*sin(Bang)
+	return sqrt(x**2 + y**2)
+
+#function for getting angle of new vector when two are added
+def AngApB(Amag, Aang, Bmag, Bang):
+	Aang = radians(Aang)
+	Bang = radians(Bang)
+	x = Amag*cos(Aang) + Bmag*cos(Bang)
+	y = Amag*sin(Aang) + Bmag*sin(Bang)
+	return degrees(atan(y/x))
+
+#function for magnitude of resulting vector from subtracting two
+def MagAmB(Amag, Aang, Bmag, Bang):
+	Aang = radians(Aang)
+	Bang = radians(Bang)
+	x = Amag*cos(Aang) - Bmag*cos(Bang)
+	y = Amag*sin(Aang) - Bmag*sin(Bang)
+	return sqrt(x**2 + y**2)
+
+#function for getting angle resulting vector from subtracting two
+def AngAmB(Amag, Aang, Bmag, Bang):
+	Aang = radians(Aang)
+	Bang = radians(Bang)
+	x = Amag*cos(Aang) - Bmag*cos(Bang)
+	y = Amag*sin(Aang) - Bmag*sin(Bang)
+	return degrees(atan(y/x))
