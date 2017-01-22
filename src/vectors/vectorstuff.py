@@ -3,70 +3,76 @@
 #Eventually gonna make a vector class
 from math import cos, sin, tan, asin, acos, atan, degrees, radians, sqrt
 
-import math
+class Vector:
+	def __init__(self, x=0, y=0, z=0):
+		self.x=x
+		self.y = y
+		self.z = z
+		self.comp=[x,y,z]
+	def getMag(self):
+		return sqrt(self.x**2+self.y**2+self.z**2)
 
-def dotProduct(vect1, vect2):
-	vect = []
-	i = 0
-	while i < len(vect1): #assume they are equal lengths
-		vect[i] = vect1[i] * vect2[i]
-		i += 1
-	return vect
+#returns new
+def add(vec1, vec2):
+	return Vector(vec1.x + vec2.x, vec1.y + vec2.y, vec1.z + vec2.z)
 
-#only works for 3D vectors
-def crossProduct(vect1, vect2):
+
+'''
+returns vec1 - vec2
+if only 1 vector is given, returns the negation of that vector
+'''
+def subtract(vec1, vec2 = None):
+	if (vec2 == None):
+		return Vector(-vec1.x, -vec1.y, -vec1.z)
+	return Vector(vec1.x - vec2.x, vec1.y - vec2.y, vec1.z - vec2.z)
+
+def dotProduct(vec1, vec2):
+	x = vec1.x * vec2.x
+	y = vec1.y * vec2.y
+	z = vec1.z * vec2.z
+	return x + y + z
+
+def crossProduct(vec1, vec2):
 	#Compute determinants
-	i = vect1[1]*vect2[2] - vect2[1]*vect1[2]
-	j = vect1[0]*vect2[2] - vect2[0]*vect1[2]
-	k = vect1[0]*vect2[1] - vect2[0]*vect1[1]
-	return [i, -j, k]
+	i = vec1.y*vec2.z - vec2.y*vec1.z
+	j = vec1.x*vec2.z - vec2.x*vec1.z
+	k = vec1.x*vec2.y - vec2.x*vec1.y
+	return Vector(i, j, k)
 
-def magnitude(vect):
-	mag = 0
-	for i in vect:
-		mag += i**2
-	return math.sqrt(mag)
 
-def angleBetween(vect1, vect2):
+def magnitude(vec):
+	return sqrt(vec.x**2 + vec.y**2 + vec.z**2)
+
+''' Uses dot product method to calculate angle. acos( (A*B) / (|A||B|) )'''
+def angleBetween(vec1, vec2):
 	dot = dotProduct(vect1, vect2)
 	mag1 = magnitude(vect1)
 	mag2 = magnitude(vect2)
 	return acos(dot / (mag1 * mag2))
 
 
-"""
-	The functions below are for vectors where only the
-	magnitude and angle are given
-"""
+#Magnitude of two vectors added
+def VecMagApB(vec1, vec2):
+	x = vec1.x + vec2.x
+	y = vec1.y + vec2.y
+	z = vec1.z + vec2.z
+	return sqrt(x**2 + y**2 + z**2)
 
-#function for adding two vectors and getting the magnitude
-def MagApB(Amag, Aang, Bmag, Bang):
-	Aang = radians(Aang)
-	Bang = radians(Bang)
-	x = Amag*cos(Aang) + Bmag*cos(Bang)
-	y = Amag*sin(Aang) + Bmag*sin(Bang)
-	return sqrt(x**2 + y**2)
+#Magnitude of two vectors subtracted
+def VecMagAmB(vec1, vec2):
+	x = vec1.x - vec2.x
+	y = vec1.y - vec2.y
+	z = vec1.z - vec2.z
+	return sqrt(x**2 + y**2 + z**2)
 
-#function for getting angle of new vector when two are added
-def AngApB(Amag, Aang, Bmag, Bang):
-	Aang = radians(Aang)
-	Bang = radians(Bang)
-	x = Amag*cos(Aang) + Bmag*cos(Bang)
-	y = Amag*sin(Aang) + Bmag*sin(Bang)
+#returns angle between two added vectors
+def Vec2DAngApB(vec1, vec2):
+	x = vec1.x + vec2.x
+	y = vec1.y + vec2.y
 	return degrees(atan(y/x))
 
-#function for magnitude of resulting vector from subtracting two
-def MagAmB(Amag, Aang, Bmag, Bang):
-	Aang = radians(Aang)
-	Bang = radians(Bang)
-	x = Amag*cos(Aang) - Bmag*cos(Bang)
-	y = Amag*sin(Aang) - Bmag*sin(Bang)
-	return sqrt(x**2 + y**2)
-
-#function for getting angle resulting vector from subtracting two
-def AngAmB(Amag, Aang, Bmag, Bang):
-	Aang = radians(Aang)
-	Bang = radians(Bang)
-	x = Amag*cos(Aang) - Bmag*cos(Bang)
-	y = Amag*sin(Aang) - Bmag*sin(Bang)
+#returns angle between two subtracted vectors
+def Vec2DAngAmB(vec1, vec2):
+	x = vec1.x - vec2.x
+	y = vec1.y - vec2.y
 	return degrees(atan(y/x))
