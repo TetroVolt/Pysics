@@ -59,29 +59,3 @@ def angleBetween(vec1, vec2):
 	mag1 = magnitude(vect1)
 	mag2 = magnitude(vect2)
 	return acos(dot / (mag1 * mag2))
-
-#Magnitude of two vectors added
-def VecMagApB(vec1, vec2):
-	x = vec1.x + vec2.x
-	y = vec1.y + vec2.y
-	z = vec1.z + vec2.z
-	return sqrt(x**2 + y**2 + z**2)
-
-#Magnitude of two vectors subtracted
-def VecMagAmB(vec1, vec2):
-	x = vec1.x - vec2.x
-	y = vec1.y - vec2.y
-	z = vec1.z - vec2.z
-	return sqrt(x**2 + y**2 + z**2)
-
-#returns angle between two added vectors
-def Vec2DAngApB(vec1, vec2):
-	x = vec1.x + vec2.x
-	y = vec1.y + vec2.y
-	return degrees(atan(y/x))
-
-#returns angle between two subtracted vectors
-def Vec2DAngAmB(vec1, vec2):
-	x = vec1.x - vec2.x
-	y = vec1.y - vec2.y
-	return degrees(atan(y/x))
