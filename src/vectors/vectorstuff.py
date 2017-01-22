@@ -2,6 +2,7 @@
 #Vectors are just lists of numbers rightnow
 #Eventually gonna make a vector class
 
+import math
 
 def dotProduct(vect1, vect2):
 	vect = []
@@ -19,4 +20,8 @@ def crossProduct(vect1, vect2):
 	k = vect1[0]*vect2[1] - vect2[0]*vect1[1]
 	return [i, -j, k]
 
-
+def magnitude(vect):
+	mag = 0
+	for i in vect:
+		mag += i**2
+	return math.sqrt(mag)
