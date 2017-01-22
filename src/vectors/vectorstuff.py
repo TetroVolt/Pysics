@@ -57,4 +57,4 @@ def crossProduct(vec1, vec2):
 def angleBetween(vec1, vec2):
 	dot = dotProduct(vect, vec2)
 	mag = vec1.getMag() * vec2.getMag()
-	return acos(dot / mag)
+	return degrees(acos(dot / mag))
