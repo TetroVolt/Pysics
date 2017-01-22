@@ -3,24 +3,56 @@
 #Eventually gonna make a vector class
 from math import cos, sin, tan, asin, acos, atan, degrees, radians, sqrt
 
+class Vector:
+	def __init__(self, x=0, y=0, z=0):
+		self.x=x
+		self.y = y
+		self.z = z
+		self.comp=[x,y,z]
+	def getMag(self):
+		return sqrt(self.x**2+self.y**2+self.z**2)
 
 def dotProduct(vect1, vect2):
 	vect = []
 	i = 0
 	while i < len(vect1): #assume they are equal lengths
-		vect[i] = vect1[i] * vect2[i]
+		vect[i] = vect1.comp[i] * vect2.comp[i]
 		i += 1
 	return vect
 
 #only works for 3D vectors
-def crossProduct(vect1, vect2):
+def crossProduct(vec1, vec2):
 	#Compute determinants
-	i = vect1[1]*vect2[2] - vect2[1]*vect1[2]
-	j = vect1[0]*vect2[2] - vect2[0]*vect1[2]
-	k = vect1[0]*vect2[1] - vect2[0]*vect1[1]
+	i = vec1.y*vec2.z - vec2.y*vec1.z
+	j = vec1.x*vec2.z-vec2.x*vec1.z
+	k = vec1.x*vec2.y-vec2.x*vec1.y
 	return [i, -j, k]
 
+#Magnitude of two vectors added
+def VecMagApB(vec1, vec2):
+	x = vec1.x + vec2.x
+	y = vec1.y + vec2.y
+	z = vec1.z + vec2.z
+	return sqrt(x**2 + y**2 + z**2)
 
+#Magnitude of two vectors subtracted
+def VecMagAmB(vec1, vec2):
+	x = vec1.x - vec2.x
+	y = vec1.y - vec2.y
+	z = vec1.z - vec2.z
+	return sqrt(x**2 + y**2 + z**2)
+
+#returns angle between two added vectors
+def Vec2DAngApB(vec1, vec2):
+	x = vec1.x + vec2.x
+	y = vec1.y + vec2.y
+	return degrees(atan(y/x))
+
+#returns angle between two subtracted vectors
+def Vec2DAngAmB(vec1, vec2):
+	x = vec1.x - vec2.x
+	y = vec1.y - vec2.y
+	return degrees(atan(y/x))
 """
 	The functions below are for vectors where only the
 	magnitude and angle are given
