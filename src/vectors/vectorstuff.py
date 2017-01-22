@@ -25,3 +25,11 @@ def magnitude(vect):
 	for i in vect:
 		mag += i**2
 	return math.sqrt(mag)
+
+def angleBetween(vect1, vect2):
+	dot = dotProduct(vect1, vect2)
+	mag1 = magnitude(vect1)
+	mag2 = magnitude(vect2)
+	return acos(dot / (mag1 * mag2))
+
+
