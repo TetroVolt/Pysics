@@ -12,10 +12,23 @@ class Vector:
 	def getMag(self):
 		return sqrt(self.x**2+self.y**2+self.z**2)
 
+class VectorFactory:
+	def __init__(self):
+		pass
+	def vectorFromList(self, L):
+		while len(L) < 3:
+			L.append(0)
+		return Vector(x=L[0], y=L[1], z=L[2])
+	#this will only be a 2D vector
+	def vectorFromMagAndAngle(self, mag, ang):
+		ang = radians(ang)
+		L = [mag*cos(ang), mag*sin(ang), 0]
+		return Vector(x=L[0], y=L[1], z=L[2])
+
 def dotProduct(vect1, vect2):
-	vect = []
+	vect = [0,0,0]
 	i = 0
-	while i < len(vect1): #assume they are equal lengths
+	while i < 3: #assume they are equal lengths
 		vect[i] = vect1.comp[i] * vect2.comp[i]
 		i += 1
 	return vect
@@ -26,6 +39,12 @@ def crossProduct(vec1, vec2):
 	j = vec1.x*vec2.z-vec2.x*vec1.z
 	k = vec1.x*vec2.y-vec2.x*vec1.y
 	return [i, -j, k]
+
+#finds the angle between two vectors
+def angleBetween(vec1, vec2):
+	dp = dotProduct(vec1, vec2)
+	mag = vec1.getMag() * vec2.getMag()
+	return degrees(acos(dp/mag))
 
 #Magnitude of two vectors added
 def VecMagApB(vec1, vec2):
