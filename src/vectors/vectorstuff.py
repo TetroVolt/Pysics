@@ -51,11 +51,10 @@ def crossProduct(vec1, vec2):
 	i = vec1.y*vec2.z - vec2.y*vec1.z
 	j = vec1.x*vec2.z - vec2.x*vec1.z
 	k = vec1.x*vec2.y - vec2.x*vec1.y
-	return Vector(i, j, k)
+	return Vector(i, -j, k)
 
 ''' Uses dot product method to calculate angle. acos( (A*B) / (|A||B|) )'''
 def angleBetween(vec1, vec2):
 	dot = dotProduct(vect1, vect2)
-	mag1 = magnitude(vect1)
-	mag2 = magnitude(vect2)
-	return acos(dot / (mag1 * mag2))
+	mag = vec1.getMag() * vec2.getMag()
+	return acos(dot / mag)
