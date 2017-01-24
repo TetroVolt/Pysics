@@ -12,6 +12,20 @@ class Vector:
 	def getMag(self):
 		return sqrt(self.x**2+self.y**2+self.z**2)
 
+	def __str__(self):
+		return "X: {}, Y: {}, Z: {}".format(self.x, self.y, self.z)
+	def __add__(self, other):
+		return Vector(x = self.x + other.x,y = self.y +other.y,z = self.z + other.z)
+	def __sub__(self, other):
+		return Vector(x = self.x - other.x, y = self.y - other.y, z = self.z - other.z)
+	def __mul__(self, other):
+		if isinstance(other, int):
+			return Vector(x = other * self.x, y =  other * self.y, z = other * self.z)
+		else:
+			print("Only Scalar multiplication is currently supported")
+			return None
+	__rmul__ = __mul__
+
 class VectorFactory:
 	def __init__(self):
 		pass

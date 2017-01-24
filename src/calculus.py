@@ -23,8 +23,8 @@ class PolyParser:
         first = True
         #print(str, L)
         for elm in self.kesSplit(str):
-            index = elm.index('x')
-            if not first and elm[index-1] != ' ' and elm[index-1] != '(' and elm[index -1] != '^':
+            index = elm.find('x')
+            if not first and (elm[index-1].isdigit() or elm[index-1] == ')'):
                 elm = elm.replace('x', '*x')
             elm = elm.replace('^', '**')
             L.append(elm)
