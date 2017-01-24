@@ -5,7 +5,7 @@ from math import cos, sin, tan, asin, acos, atan, degrees, radians, sqrt
 
 class Vector:
 	def __init__(self, x=0, y=0, z=0):
-		self.x=x
+		self.x = x
 		self.y = y
 		self.z = z
 		self.comp=[x,y,z]
@@ -40,10 +40,10 @@ class VectorFactory:
 		return Vector(x=L[0], y=L[1], z=L[2])
 
 
-
 #returns new
 def add(vec1, vec2):
 	return Vector(vec1.x + vec2.x, vec1.y + vec2.y, vec1.z + vec2.z)
+
 '''
 returns vec1 - vec2
 if only 1 vector is given, returns the negation of that vector
@@ -71,4 +71,4 @@ def crossProduct(vec1, vec2):
 def angleBetween(vec1, vec2):
 	dot = dotProduct(vec1, vec2)
 	mag = vec1.getMag() * vec2.getMag()
-	return degrees(acos(dot / mag))
+	return degrees(acos(dot / mag)) #returns answer in degress because kesley wanted to :/
