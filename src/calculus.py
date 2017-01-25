@@ -1,6 +1,6 @@
 #Integrals/Derivatives
 from math import sin, cos, tan, pi
-class Polynomial:
+class Function:
     def __init__(self, parsed):
         #for now a polynomial is treated as a List of the coeficients from highest to lowest.
         #This means that len(L) - 1 is the degree of the Polynomial
@@ -13,8 +13,21 @@ class Polynomial:
                 tot += (eval(each) * delta)
             x+=delta
         return tot
+    def slopeAt(self, x):
+        diff, delta = 0, .0000000001
+        for each in self.part:
+            temp = each.replace('x', '(x+delta)')
+            diff += (eval(temp) - eval(each)) / delta
+        return diff
+    def evaluateAt(self, x):
+        tot = 0
+        for each in self.part:
+            print(each, x, eval(each))
+            tot += eval(each)
+        return tot
 
-class PolyParser:
+
+class FuncParser:
     def __init__(self, str):
         self.part = self.parser(str)
     def parser(self, str):
