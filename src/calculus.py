@@ -2,8 +2,6 @@
 from math import sin, cos, tan, pi
 class Function:
     def __init__(self, parsed):
-        #for now a polynomial is treated as a List of the coeficients from highest to lowest.
-        #This means that len(L) - 1 is the degree of the Polynomial
         self.part = parsed.part
     def integrate(self, a, b):
         x, tot = a, 0
@@ -37,7 +35,6 @@ class FuncParser:
             elm = self.replaceX(elm)
             elm = elm.replace('^', '**')
             L.append(elm)
-            first = False
         return L
 
     def kesSplit(self, str):
