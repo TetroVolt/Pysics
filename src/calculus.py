@@ -22,7 +22,6 @@ class Function:
     def evaluateAt(self, x):
         tot = 0
         for each in self.part:
-            print(each, x, eval(each))
             tot += eval(each)
         return tot
 
@@ -30,32 +29,51 @@ class Function:
 class FuncParser:
     def __init__(self, str):
         self.part = self.parser(str)
+
     def parser(self, str):
         str = self.removeSpaces(str)
-        print(str)
         L = []
-        first = True
         for elm in self.kesSplit(str):
-            index = elm.find('x')
-            if not first and index >= 0 and (elm[index-1].isdigit() or elm[index-1] == ')'):
-                elm = elm.replace('x', '*x')
+            elm = self.replaceX(elm)
             elm = elm.replace('^', '**')
             L.append(elm)
             first = False
-            print(L)
         return L
 
     def kesSplit(self, str):
-        L1, ret = str.split('-'), []
-        for i in range(1, len(L1)):
-            L1[i] = '-' + L1[i]
+        L1, ret = self.specialMinusSplit(str), []
         for sec in L1:
             for each in sec.split('+'):
                 ret.append(each)
         return ret
 
+    #resurns a list of seperated parts
     def specialMinusSplit(self, str):
-        pass
+        indexList = [i for i in range(len(str)) if str[i] == '-']
+        lastIndex = 0
+        retList = []
+        for index in indexList:
+            if index==0:
+                continue
+            if str[index-1].isdigit() or str[index-1]=='x':
+                retList.append(str[lastIndex:index])
+                lastIndex = index
+        retList.append(str[lastIndex:])
+        return retList
+
+    def replaceX(self, str):
+        indexList = [i for i in range(len(str)) if str[i] == 'x']
+        retStr = ''
+        lastIndex = 0
+        for index in indexList:
+            if index == 0:
+                continue
+            if str[index-1].isdigit() or str[index-1] == ')':
+                retStr += str[lastIndex:index]
+                lastIndex = index
+        retStr += str[lastIndex:]
+        return retStr
+
 
     def removeSpaces(self, str):
         cstr = []
