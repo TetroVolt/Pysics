@@ -32,16 +32,17 @@ class FuncParser:
         self.part = self.parser(str)
     def parser(self, str):
         str = self.removeSpaces(str)
+        print(str)
         L = []
         first = True
-        #print(str, L)
         for elm in self.kesSplit(str):
             index = elm.find('x')
-            if not first and (elm[index-1].isdigit() or elm[index-1] == ')'):
+            if not first and index >= 0 and (elm[index-1].isdigit() or elm[index-1] == ')'):
                 elm = elm.replace('x', '*x')
             elm = elm.replace('^', '**')
             L.append(elm)
             first = False
+            print(L)
         return L
 
     def kesSplit(self, str):
@@ -52,6 +53,9 @@ class FuncParser:
             for each in sec.split('+'):
                 ret.append(each)
         return ret
+
+    def specialMinusSplit(self, str):
+        pass
 
     def removeSpaces(self, str):
         cstr = []
