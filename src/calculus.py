@@ -7,20 +7,18 @@ class Function:
         x, tot = a, 0
         delta = .0001
         while x < b:
-            for each in self.part:
-                tot += (eval(each) * delta)
+
+            tot += (eval(self.part) * delta)
             x+=delta
         return tot
     def slopeAt(self, x):
         diff, delta = 0, .0000000001
-        for each in self.part:
-            temp = each.replace('x', '(x+delta)')
-            diff += (eval(temp) - eval(each)) / delta
+        temp = each.replace('x', '(x+delta)')
+        diff += (eval(temp) - eval(self.part)) / delta
         return diff
     def evaluateAt(self, x):
         tot = 0
-        for each in self.part:
-            tot += eval(each)
+        tot += eval(self.part)
         return tot
 
 
@@ -30,12 +28,9 @@ class FuncParser:
 
     def parser(self, str):
         str = self.removeSpaces(str)
-        L = []
-        for elm in self.kesSplit(str):
-            elm = self.replaceX(elm)
-            elm = elm.replace('^', '**')
-            L.append(elm)
-        return L
+        str=self.replaceX(str)
+        str=str.replace('^', '**')
+        return str
 
     def kesSplit(self, str):
         L1, ret = self.specialMinusSplit(str), []
@@ -60,15 +55,15 @@ class FuncParser:
 
     def replaceX(self, str):
         indexList = [i for i in range(len(str)) if str[i] == 'x']
-        retStr = ''
-        lastIndex = 0
+        lastIndex = indexList[0]
+        retStr = str[:lastIndex]
         for index in indexList:
             if index == 0:
                 continue
             if str[index-1].isdigit() or str[index-1] == ')':
-                retStr += str[lastIndex:index]
+                retStr += ('*' + str[lastIndex:index])
                 lastIndex = index
-        retStr += str[lastIndex:]
+        retStr += '*' + str[lastIndex:]
         return retStr
 
 
@@ -78,3 +73,5 @@ class FuncParser:
             if char != ' ':
                 cstr.append(char)
         return ''.join(cstr)
+x = Function(FuncParser("3x^3-10x^x+9x"))
+print(x.integrate(0,1))
